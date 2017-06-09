@@ -1,0 +1,7 @@
+---
+apt_pkgs:
+  - python-dev
+  - dnsutils
+  - git
+  - unzip
+  - zip

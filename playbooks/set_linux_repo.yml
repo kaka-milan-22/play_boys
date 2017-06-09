@@ -1,0 +1,3 @@
+- hosts: webservers
+  roles:
+    - role: set_aliyun_repo

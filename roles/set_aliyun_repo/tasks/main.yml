@@ -1,0 +1,41 @@
+---
+
+
+- name: Add the OS specific varibles
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: backup old yum file 
+  shell: mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+  when: ansible_os_family == 'RedHat'
+  tags: backyumfile
+
+- name:  Copy the template file to env
+  shell: mv /etc/apt/sources.list /etc/apt/sources.list.bak
+  when: ansible_os_family == 'Debian'
+  tags: backaptfile
+
+- name: Copy the template file to env
+  template: src=Centos-6.repo.j2 dest=/etc/yum.repos.d/CentOS-Base.repo
+  when: ansible_os_family == 'RedHat'
+
+- name:  Copy the template file to env
+  template: src=sources.list.j2 dest=/etc/apt/sources.list
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat install the latest version of common tools
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items: yum_pkgs 
+  when: ansible_os_family == 'RedHat'
+  tags: yuminstall
+
+- name: Ubuntu install the latest version of common tools for ubuntu
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items: apt_pkgs 
+  when: ansible_os_family == 'Debian'
+
