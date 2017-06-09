@@ -1,30 +1,31 @@
 ---
 yum_pkgs:
   - bind-utils
-  #- gcc 
-  #- gcc-c++ 
-  #- libstdc++ 
-  #- tcl 
-  #- tcl-devel 
-  #- glibc 
-  #- glibc-devel 
-  #- zlib 
-  #- zlib-devel 
-  #- texinfo 
-  #- tk-devel 
-  #- curl 
-  #- curl-devel 
-  #- openssl-devel
-  #- perl 
-  #- cpio 
-  #- expat-deve
-  #- vim
-  #- nc
-  #- xz
-  #- unzip
-  #- lrzsz
-  #- gcc
-  #- make
-  #- kernel-devel
-  #- python-devel
+  - gcc 
+  - python-devel
+  - gcc-c++ 
+  - libstdc++ 
+  - tcl 
+  - tcl-devel 
+  - glibc 
+  - glibc-devel 
+  - zlib 
+  - zlib-devel 
+  - texinfo 
+  - tk-devel 
+  - curl 
+  - curl-devel 
+  - openssl-devel
+  - perl 
+  - cpio 
+  - expat-deve
+  - vim
+  - nc
+  - xz
+  - unzip
+  - lrzsz
+  - gcc
+  - make
+  - kernel-devel
+  - python-devel
 
