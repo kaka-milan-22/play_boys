@@ -1,0 +1,14 @@
+---
+
+#export JAVA_HOME=/usr/local/jdk1.7.0_71
+#export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+#export PATH=$JAVA_HOME/bin:$PATH
+java_home: /usr/local/jdk/
+tar_dir: jdk1.8.0_131
+jdk_dir: /app/package/
+jdk_name: jdk-8u131-linux-x64.tar.gz
+tmp_dir: /tmp/
+bash_cfg_file: /etc/bashrc
+
+
+

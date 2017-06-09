@@ -1,0 +1,22 @@
+---
+- name: create jdk dir
+  file: 
+    path: '{{ java_home }}'
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+
+- name: tar file to tmp
+  #unarchive: tar zxvf '{{ tmp_dir }}{{ jdk_name }}' -C '{{ java_home }}'
+  unarchive:
+    src: '{{ jdk_dir }}{{ jdk_name }}'
+    dest: '{{ java_home }}'
+    copy: yes
+
+- name: Copy the template file to env
+  template: src=bashrc.j2 dest='{{ bash_cfg_file }}'
+  notify: 
+   - restart bashrc
+
+
