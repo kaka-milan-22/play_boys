@@ -18,7 +18,7 @@ yum_pkgs:
   - openssl-devel
   - perl 
   - cpio 
-  - expat-deve
+  - expat-devel
   - vim
   - nc
   - xz
@@ -27,5 +27,4 @@ yum_pkgs:
   - gcc
   - make
   - kernel-devel
-  - python-devel
 

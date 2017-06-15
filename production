@@ -19,7 +19,7 @@
 
 [webservers]
 ubuntu-2
-192.168.10.201
+192.168.7.201
 
 #alpha.example.org
 #beta.example.org
