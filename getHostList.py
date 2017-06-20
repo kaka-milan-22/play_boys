@@ -19,10 +19,23 @@ PROJSQL = "select p.application_name,h.address,h.dxip,h.hostname from project as
     where isShow = 1\
     order by application_name; "
 
+GETALLHOST = "select hostname from hostinfo;"
 
 conn=MySQLdb.connect(host="127.0.0.1",user="root",passwd="root123",db="cmdb",charset="utf8")
 cursor = conn.cursor()
 
+
+def getHostVars():
+    global HOST
+    HOST["_meta"] = {}
+    HOST["_meta"] ["hostvars"] = {}
+    count = cursor.execute(GETALLHOST)
+    results = cursor.fetchall()
+    for r in results:
+        hostname = r[0]
+        HOST["_meta"]["hostvars"][hostname] = {}
+        HOST["_meta"]["hostvars"][hostname]['hostname'] = hostname
+        # print HOST["_meta"]["hostvars"][hostname]['hostname']
 
 
 
@@ -58,6 +71,7 @@ def setGroups():
 
 
 if __name__  == "__main__":
+    getHostVars()
     getHosts()
     setGroups()
     print json.dumps(HOST)
