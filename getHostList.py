@@ -61,7 +61,5 @@ if __name__  == "__main__":
     getHosts()
     setGroups()
     print json.dumps(HOST)
-
-    # getHosts()
     cursor.close()
     conn.close()
