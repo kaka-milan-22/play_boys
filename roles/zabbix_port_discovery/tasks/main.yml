@@ -1,0 +1,52 @@
+---
+- name: Add the OS specific varibles
+  include_vars: "{{ ansible_os_family  }}.yml"
+
+- name: RedHat install port.py python library 
+  yum:
+    name: "{{ item }}"
+    state: installed
+    update_cache: yes
+  with_items: "{{ yum_pkgs }}"
+  when: ansible_os_family == 'RedHat'
+  tags: yuminstall
+
+- name: RedHat install port.py python library 
+  pip:
+    name: psutil
+
+- name: Copy the port.py to zabbix/bin directory 
+  copy:
+    src: ../files/ports.py 
+    dest: /etc/zabbix/bin/ports.py 
+    owner: zabbix 
+    group: zabbix 
+    mode: 0755
+
+
+- name: zabbix_agentd.d/UserParameter.conf add port discory config 
+  lineinfile:
+     dest: /etc/zabbix/zabbix_agentd.d/UserParameter.conf 
+     insertafter: 'EOF'   
+     line: 'UserParameter=ports.discovery,sudo python /etc/zabbix/bin/ports.py'
+
+- name: zabbix add port discovery config
+  lineinfile:
+     dest: /etc/zabbix/zabbix_agentd.d/UserParameter.conf 
+     insertafter: 'EOF' 
+     line: 'UserParameter=ports.discovery,sudo python /etc/zabbix/bin/ports.py'
+
+- name: zabbix add sudo privileges1
+  lineinfile:
+     dest:  /etc/sudoers 
+     insertafter: 'EOF' 
+     validate: 'visudo -cf %s'
+     line: 'Defaults:zabbix  !requiretty'
+
+- name: zabbix add sudo privileges2
+  lineinfile:
+     dest:  /etc/sudoers 
+     insertafter: 'EOF' 
+     validate: 'visudo -cf %s'
+     line: 'zabbix          ALL=(ALL)       NOPASSWD:ALL'
+  notify: restart zabbix agent

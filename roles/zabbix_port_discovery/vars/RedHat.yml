@@ -1,0 +1,5 @@
+---
+yum_pkgs:
+  - python-devel
+  - python-setuptools
+  - python-pip
