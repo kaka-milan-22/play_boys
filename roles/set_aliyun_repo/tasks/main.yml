@@ -27,7 +27,7 @@
     name: "{{ item }}"
     state: installed
     update_cache: yes
-  with_items: yum_pkgs 
+  with_items: "{{ yum_pkgs }}"
   when: ansible_os_family == 'RedHat'
   tags: yuminstall
 
@@ -36,6 +36,6 @@
     name: "{{ item }}"
     state: present
     update_cache: yes
-  with_items: apt_pkgs 
+  with_items: "{{ apt_pkgs }}" 
   when: ansible_os_family == 'Debian'
 
