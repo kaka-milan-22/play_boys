@@ -2,6 +2,15 @@
 - name: Add the OS specific varibles
   include_vars: "{{ ansible_os_family  }}.yml"
 
+- name: Copy repo to remote host for install python rpm package
+  copy:
+    src: ../files/epel.repo
+    dest: /etc/yum.repos.d/epel.repo
+    owner: root 
+    group: root 
+    mode: 0755
+
+
 - name: RedHat install port.py python library 
   yum:
     name: "{{ item }}"
@@ -14,6 +23,7 @@
 - name: RedHat install port.py python library 
   pip:
     name: psutil
+  tags: pipinstall
 
 - name: Copy the port.py to zabbix/bin directory 
   copy:
