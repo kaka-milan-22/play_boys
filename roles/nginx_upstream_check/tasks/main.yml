@@ -1,8 +1,9 @@
 ---
-- name: Run the install test script when /usr/local/Pnginx/ doesn't exists. 
+- name: Run the install test script to exit this role  when /usr/local/Pnginx/ exists. 
   shell: exit 100 
   args:
     chdir: /data/tools/soft/ 
+    removes: /usr/local/Pnginx/ 
 
 - name: Copy nginx source code to remote host for install
   copy:
