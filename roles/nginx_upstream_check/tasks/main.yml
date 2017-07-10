@@ -1,0 +1,54 @@
+---
+- name: Run the install test script when /usr/local/Pnginx/ doesn't exists. 
+  shell: exit 100 
+  args:
+    chdir: /data/tools/soft/ 
+
+- name: Copy nginx source code to remote host for install
+  copy:
+    src: ../files/nginx-1.10.1.tar.gz
+    dest: /data/tools/soft/nginx-1.10.1.tar.gz
+    backup: no
+    force: yes
+    owner: root 
+    group: root 
+    mode: 0755
+
+
+- name: Copy nginx patch source code to remote host for install
+  copy:
+    src: ../files/master.zip
+    dest: /data/tools/soft/master.zip
+    backup: no
+    force: yes
+    owner: root 
+    group: root 
+    mode: 0755
+
+
+- name: Copy nginx install bash code to remote host for install
+  copy:
+    src: ../files/install_nginx.sh
+    dest: /data/tools/soft/install_nginx.sh
+    backup: no
+    force: yes
+    owner: root 
+    group: root 
+    mode: 0755
+
+- name: Run the install script when /usr/local/Pnginx/ doesn't exists. 
+  shell: /data/tools/soft/install_nginx.sh 
+  args:
+    chdir: /data/tools/soft/ 
+    creates: /usr/local/Pnginx 
+
+
+- name: Copy nginx config file to /usr/local/nginx/conf/nginx.conf force 
+  copy:
+    src: ../files/nginx.conf
+    dest: /usr/local/Pnginx/conf/nginx.conf 
+    backup: yes
+    force: yes
+    owner: root 
+    group: root 
+    mode: 0755
